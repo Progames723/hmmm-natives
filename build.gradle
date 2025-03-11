@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+}
+
+group = 'dev.progames.hmmm_natives'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+}
