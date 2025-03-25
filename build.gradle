@@ -2,7 +2,7 @@ import com.badlogic.gdx.jnigen.commons.CompilerABIType
 
 plugins {
     id "java-library"
-    id "com.badlogicgames.jnigen.jnigen-gradle" version "3.0.0"
+    id "com.badlogicgames.jnigen.jnigen-gradle" version "3.0.0-SNAPSHOT"
 }
 
 group = 'dev.progames.hmmm_natives'
@@ -13,6 +13,7 @@ repositories {
     maven {
         url = "https://oss.sonatype.org/content/repositories/snapshots/"
     }
+    gradlePluginPortal()
 }
 
 dependencies {
