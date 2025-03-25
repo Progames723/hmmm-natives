@@ -31,7 +31,7 @@ jnigen {
     multiThreadedCompile = true
 
     all {
-        cppFlags += ["-std=c++23", "-O3"]
+        cppFlags += ["-std=c++2b", "-O3"]
     }
 
     addWindows(x64, x86, GCC_CLANG)
