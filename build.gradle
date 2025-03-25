@@ -1,5 +1,3 @@
-import com.badlogic.gdx.jnigen.commons.CompilerABIType
-
 plugins {
     id "java-library"
     id "com.badlogicgames.jnigen.jnigen-gradle" version "3.0.0-SNAPSHOT"
