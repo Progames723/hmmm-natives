@@ -31,17 +31,17 @@ jnigen {
     multiThreadedCompile = true
 
     all {
-        if (it.os == Windows) {
-            cppFlags += ["/std:c++20"]
+        if (it.os == Linux) {
+            cppFlags += ["-std=c++2a"]
         } else {
             cppFlags += ["-std=c++20"]
         }
     }
 
-    addWindows(x64, x86, MSVC)
-    addWindows(x32, x86, MSVC)
-    addWindows(x64, ARM, MSVC)
-    addWindows(x32, ARM, MSVC)
+    addWindows(x64, x86, GCC_CLANG)
+    addWindows(x32, x86, GCC_CLANG)
+    addWindows(x64, ARM, GCC_CLANG)
+    addWindows(x32, ARM, GCC_CLANG)
 
     addLinux(x64, x86)
     addLinux(x32, x86)
