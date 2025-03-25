@@ -6,9 +6,9 @@ import java.lang.reflect.AccessibleObject;
 
 public class NativeReflectUtils {
 	/*JNI
-	#if defined _WIN32 || defined __CYGWIN__ || defined __MINGW32__
-	#define JNI_EXPORT __attribute__ ((dllexport))
-	#endif //windows stuff
+	#ifdef MSVC
+	#define __fltused 1
+	#endif
 	*/
 	
 	public static native void forceSetAccessible(AccessibleObject o, boolean flag);/*
