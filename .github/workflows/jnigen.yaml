@@ -35,6 +35,8 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
+      - name: Fix gradle
+        run: chmod +x gradlew
 
       - name: Initialize jnigen
         run: ./gradlew jnigen
@@ -75,6 +77,8 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
+      - name: Fix gradle
+        run: chmod +x gradlew
 
       - name: Initialize jnigen
         run: ./gradlew jnigen
@@ -125,6 +129,8 @@ jobs:
       - name: Unzip artifacts
         run: unzip -o natives-mac.zip
 
+      - name: Fix gradle
+        run: chmod +x gradlew
 
       - name: Package All
         run: ./gradlew jnigenPackageAll
