@@ -74,7 +74,7 @@ public class NativeReflectUtils {
 	*/
 	
 	public static native void setStaticObjectField(Class<?> cls, String name, String signature, Object val);/*
-		env->SetStaticObjectField(cls, env->GetStaticFieldID(cls, name, signature, val);
+		env->SetStaticObjectField(cls, env->GetStaticFieldID(cls, name, signature)), val);
 		if (env->ExceptionCheck() == JNI_TRUE) {
             env->Throw(env->ExceptionOccurred());
             env->ExceptionClear();
@@ -162,7 +162,7 @@ public class NativeReflectUtils {
 	*/
 	
 	public static native Object getStaticObjectField(Class<?> cls, String name, String signature, Object val);/*
-		auto ret = env->GetStaticObjectField(cls, env->GetStaticFieldID(cls, name, signature);
+		auto ret = env->GetStaticObjectField(cls, env->GetStaticFieldID(cls, name, signature));
 		if (env->ExceptionCheck() == JNI_TRUE) {
             env->Throw(env->ExceptionOccurred());
             env->ExceptionClear();
@@ -236,7 +236,7 @@ public class NativeReflectUtils {
 	*/
 	
 	public static native void setObjectField(Object o, String name, String signature, Object val);/*
-		env->SetObjectField(o, env->GetFieldID(env->GetObjectClass(o), name, signature, val);
+		env->SetObjectField(o, env->GetFieldID(env->GetObjectClass(o), name, signature), val);
 		if (env->ExceptionCheck() == JNI_TRUE) {
             env->Throw(env->ExceptionOccurred());
             env->ExceptionClear();
@@ -324,7 +324,7 @@ public class NativeReflectUtils {
 	*/
 	
 	public static native Object getObjectField(Object o, String name, String signature);/*
-		auto ret = env->GetObjectField(o, env->GetFieldID(env->GetObjectClass(o), name, signature);
+		auto ret = env->GetObjectField(o, env->GetFieldID(env->GetObjectClass(o), name, signature));
 		if (env->ExceptionCheck() == JNI_TRUE) {
             env->Throw(env->ExceptionOccurred());
             env->ExceptionClear();
