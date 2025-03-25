@@ -5,6 +5,16 @@ import dev.progames723.hmmm_natives.internal.NativeLibraries;
 import java.lang.reflect.AccessibleObject;
 
 public class NativeReflectUtils {
+	/*JNI
+	#if defined _WIN32 || defined __CYGWIN__ || defined __MINGW32__
+	#ifdef __GNUC__
+	#define JNI_EXPORT __attribute__ ((dllimport))
+	#else
+	#define JNI_EXPORT __declspec(dllimport)
+	#endif //gnu
+	#endif //windows stuff
+	*/
+	
 	public static native void forceSetAccessible(AccessibleObject o, boolean flag);/*
 		env->SetBooleanField(o, env->GetFieldID(env->GetObjectClass(o), "override", "Z"), flag);
 	*/
