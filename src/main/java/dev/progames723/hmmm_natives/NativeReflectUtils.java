@@ -7,7 +7,13 @@ import java.lang.reflect.AccessibleObject;
 public class NativeReflectUtils {
 	/*JNI
 	#ifdef MSVC
-	#define __fltused 1
+	#define _fltused 1
+	#include <windows.h>
+
+	extern "C" BOOL WINAPI DllMain (HINSTANCE const instance, DWORD const reason, LPVOID const reserved) {
+		return TRUE;
+	}
+
 	#endif
 	*/
 	
