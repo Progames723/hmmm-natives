@@ -36,7 +36,7 @@ jnigen {
             compilerPrefix = compilerSuffix
             compilerSuffix = ""
         } else if (os == Windows) {
-            cppFlags += ["/std:c++20", "/NOENTRY", "/MT"]
+            cppFlags += ["/std:c++20", "/NOENTRY", "/MD"]
         }
     }
 
