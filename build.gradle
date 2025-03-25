@@ -33,6 +33,8 @@ jnigen {
     all {
         if (it.os == Linux) {
             cppFlags += ["-std=c++2a"]
+            compilerPrefix = compilerSuffix
+            compilerSuffix = ""
         } else {
             cppFlags += ["-std=c++20"]
         }
