@@ -34,8 +34,9 @@ jnigen {
     all {
         if (it.os == Linux) {
             cppFlags += ["-std=c++2a", "-Wconversion-null"]
+            String temp = compilerPrefix
             compilerPrefix = compilerSuffix
-            compilerSuffix = ""
+            compilerSuffix = temp
         } else if (os == Windows) {
             cppFlags += ["/std:c++20", "/NOENTRY", "/MD"]
         }
