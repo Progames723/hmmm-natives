@@ -7,11 +7,7 @@ import java.lang.reflect.AccessibleObject;
 public class NativeReflectUtils {
 	/*JNI
 	#if defined _WIN32 || defined __CYGWIN__ || defined __MINGW32__
-	#ifdef __GNUC__
-	#define JNI_EXPORT __attribute__ ((dllimport))
-	#else
-	#define JNI_EXPORT __declspec(dllimport)
-	#endif //gnu
+	#define JNI_EXPORT __attribute__ ((dllexport))
 	#endif //windows stuff
 	*/
 	

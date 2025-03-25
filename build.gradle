@@ -32,7 +32,7 @@ jnigen {
 
     all {
         if (it.os == MacOsX) return
-        cppFlags += ["-std=c++2a"]
+        cppFlags += ["-std=c++2a", "-Wconversion-null"]
         compilerPrefix = compilerSuffix
         compilerSuffix = ""
     }
