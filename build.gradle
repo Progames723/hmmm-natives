@@ -33,7 +33,6 @@ jnigen {
     all {
         if (it.os == MacOsX) return
         cppFlags += ["-std=c++2a"]
-        if (os != Linux) return
         compilerPrefix = compilerSuffix
         compilerSuffix = ""
     }
