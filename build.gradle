@@ -1,5 +1,8 @@
+import com.badlogic.gdx.jnigen.commons.CompilerABIType
+
 plugins {
-    id 'java'
+    id "java-library"
+    id "com.badlogicgames.jnigen.jnigen-gradle" version "3.0.0"
 }
 
 group = 'dev.progames.hmmm_natives'
@@ -7,8 +10,38 @@ version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven {
+        url = "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
 }
 
 dependencies {
+    api "com.badlogicgames.jnigen:jnigen-loader:$jnigen_version"
+    api "com.badlogicgames.jnigen:jnigen-runtime:$jnigen_version"
+    implementation "com.badlogicgames.jnigen:jnigen-runtime-platform:$jnigen_version:natives-desktop"
+    implementation "com.badlogicgames.jnigen:jnigen-runtime-platform:$jnigen_version:natives-ios"
+    implementation "com.badlogicgames.jnigen:jnigen-runtime-platform:$jnigen_version:natives-arm64-v8a"
+    implementation "com.badlogicgames.jnigen:jnigen-runtime-platform:$jnigen_version:natives-armeabi-v7a"
+    implementation "com.badlogicgames.jnigen:jnigen-runtime-platform:$jnigen_version:natives-x86"
+    implementation "com.badlogicgames.jnigen:jnigen-runtime-platform:$jnigen_version:natives-x86_64"
+}
 
+jnigen {
+    sharedLibName = "hmmm-natives"
+    multiThreadedCompile = true
+
+    addWindows(x64, x86, GCC_CLANG)
+    addWindows(x32, x86, GCC_CLANG)
+    addWindows(x64, ARM, GCC_CLANG)
+    addWindows(x32, ARM, GCC_CLANG)
+
+    addLinux(x64, x86)
+    addLinux(x32, x86)
+    addLinux(x64, ARM)
+    addLinux(x32, ARM)
+    addLinux(x64, RISCV)
+    addLinux(x32, RISCV)
+
+    addMac(x64, x86)
+    addMac(x64, ARM)
 }
