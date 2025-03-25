@@ -74,7 +74,7 @@ public class NativeReflectUtils {
 	*/
 	
 	public static native void setStaticObjectField(Class<?> cls, String name, String signature, Object val);/*
-		env->SetStaticObjectField(cls, env->GetStaticFieldID(cls, name, signature)), val);
+		env->SetStaticObjectField(cls, env->GetStaticFieldID(cls, name, signature), val);
 		if (env->ExceptionCheck() == JNI_TRUE) {
             env->Throw(env->ExceptionOccurred());
             env->ExceptionClear();
