@@ -31,11 +31,11 @@ jnigen {
     multiThreadedCompile = true
 
     all {
-        if (it.os == Linux) {
-            cppFlags += ["-std=c++2a"]
-            compilerPrefix = compilerSuffix
-            compilerSuffix = ""
-        }
+        if (it.os == MacOsX) return
+        cppFlags += ["-std=c++2a"]
+        if (os != Linux) return
+        compilerPrefix = compilerSuffix
+        compilerSuffix = ""
     }
 
     addWindows(x64, x86, GCC_CLANG) {
