@@ -1,7 +1,5 @@
 package dev.progames723.hmmm_natives;
 
-import dev.progames723.hmmm_natives.internal.NativeLibraries;
-
 import java.lang.reflect.AccessibleObject;
 
 public class NativeReflectUtils {

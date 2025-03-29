@@ -8,5 +8,5 @@ pluginManagement {
 	}
 }
 
-rootProject.name = 'hmmm-natives'
+rootProject.name = 'hmmm_natives'
 

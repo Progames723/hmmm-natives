@@ -1,8 +1,8 @@
-package dev.progames723.hmmm_natives.internal;
+package dev.progames723.hmmm_natives;
 
-import com.badlogic.gdx.jnigen.loader.SharedLibraryLoader;
+import dev.progames723.hmmm_natives.shadowed.com.badlogic.gdx.jnigen.loader.SharedLibraryLoader;
 
-public class NativeLibraries {
+class NativeLibraries {
 	private static boolean initialized = false;
 	
 	public static void initIfNeeded() {
