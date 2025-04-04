@@ -5,8 +5,27 @@ import java.lang.reflect.AccessibleObject;
 public class NativeReflectUtils {
 	/*JNI
 	#ifdef MSVC
+	#ifndef _MSVC_FLTUSED
+	#define _MSVC_FLTUSED
 	extern "C" int _fltused = 1;
 	#endif
+	#endif
+	
+	#include <cstdlib>
+	
+	jvalue* to_jvalue_array(JNIEnv* env, autoArray array) {
+		jsize len = env->GetArrayLength(array);
+		jvalue** arr = reinterpret_cast<jvalue**>(malloc(sizeof(jvalue) * len));
+		for (jsize i = 0; i < len; i++) {
+			auto o = env->GetObjectArrayElement(arr, i);
+			jvalue to_add;
+			to_add.l = o;
+			(*arr)[i] = to_add;
+		}
+		jvalue* ret = *arr;
+		free(arr);
+		return ret;
+	}
 	*/
 	
 	public static native void forceSetAccessible(AccessibleObject o, boolean flag);/*
@@ -335,6 +354,346 @@ public class NativeReflectUtils {
             return NULL;
         }
         return ret;
+	*/
+	
+	public static native void callStaticVoidMethod(Class<?> cls, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		env->CallStaticVoidMethodA(cls, env->GetStaticMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return;
+		}
+	*/
+	
+	public static native int callStaticIntMethod(Class<?> cls, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallStaticIntMethodA(cls, env->GetStaticMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native long callStaticLongMethod(Class<?> cls, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallStaticLongMethodA(cls, env->GetStaticMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native float callStaticFloatMethod(Class<?> cls, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallStaticFloatMethodA(cls, env->GetStaticMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native double callStaticDoubleMethod(Class<?> cls, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallStaticDoubleMethodA(cls, env->GetStaticMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native short callStaticShortMethod(Class<?> cls, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallStaticShortMethodA(cls, env->GetStaticMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native char callStaticCharMethod(Class<?> cls, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallStaticCharMethodA(cls, env->GetStaticMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native byte callStaticByteMethod(Class<?> cls, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallStaticByteMethodA(cls, env->GetStaticMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native boolean callStaticBooleanMethod(Class<?> cls, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallStaticBooleanMethodA(cls, env->GetStaticMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native Object callStaticObjectMethod(Class<?> cls, String name, String signature, Object[] args);/*
+		jclass cls = env->GetObjectClass(o);
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallStaticObjectMethodA(cls, env->GetStaticMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native void callVoidMethod(Object o, String name, String signature, Object[] args);/*
+		jclass cls = env->GetObjectClass(o);
+		jvalue *args_arr = to_jvalue_array(env, args);
+		env->CallVoidMethodA(cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return;
+		}
+	*/
+	
+	public static native int callIntMethod(Object o, String name, String signature, Object[] args);/*
+		jclass cls = env->GetObjectClass(o);
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallIntMethodA(cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native long callLongMethod(Object o, String name, String signature, Object[] args);/*
+		jclass cls = env->GetObjectClass(o);
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallLongMethodA(cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native float callFloatMethod(Object o, String name, String signature, Object[] args);/*
+		jclass cls = env->GetObjectClass(o);
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallFloatMethodA(cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native double callDoubleMethod(Object o, String name, String signature, Object[] args);/*
+		jclass cls = env->GetObjectClass(o);
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallDoubleMethodA(cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native short callShortMethod(Object o, String name, String signature, Object[] args);/*
+		jclass cls = env->GetObjectClass(o);
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallShortMethodA(cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native char callCharMethod(Object o, String name, String signature, Object[] args);/*
+		jclass cls = env->GetObjectClass(o);
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallCharMethodA(cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native byte callByteMethod(Object o, String name, String signature, Object[] args);/*
+		jclass cls = env->GetObjectClass(o);
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallByteMethodA(cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native boolean callBooleanMethod(Object o, String name, String signature, Object[] args);/*
+		jclass cls = env->GetObjectClass(o);
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallBooleanMethodA(cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native Object callObjectMethod(Object o, String name, String signature, Object[] args);/*
+		jclass cls = env->GetObjectClass(o);
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallObjectMethodA(cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native void callNonVirtualVoidMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallNonVirtualObjectMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native int callNonVirtualIntMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallNonVirtualIntMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native long callNonVirtualLongMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallNonVirtualLongMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		free(args_arr);
+		return result;
+	*/
+	
+	public static native float callNonVirtualFloatMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallNonVirtualFloatMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native double callNonVirtualDoubleMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallNonVirtualDoubleMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native short callNonVirtualShortMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallNonVirtualShortMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native char callNonVirtualCharMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallNonVirtualCharMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native byte callNonVirtualByteMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallNonVirtualByteMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native boolean callNonVirtualBooleanMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallNonVirtualBooleanMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native Object callNonVirtualObjectMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto result = env->CallNonVirtualObjectMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return result;
+	*/
+	
+	public static native Module getModule(Class<?> cls);/*
+		return env->GetModule(cls);
+	*/
+	
+	public static native Object allocateObject(Class<?> cls);/*
+		auto allocated = env->AllocObject(cls);
+		if (allocated == NULL) {
+			env->ThrowNew(env->FindClass("java/lang/IllegalArgumentException"), "Cannot allocate an object for provided class(class cannot be abstract or an interface)");
+			return NULL;
+		}
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL
+		}
+		return allocated;
+	*/
+	
+	public static native Object newObject(Class<?> cls, String signature, Object[] args);/*
+		jvalue *args_arr = to_jvalue_array(env, args);
+		auto created = env->NewObjectA(cls, env->GetMethodID(cls, "<init>", signature), const_cast<const jvalue*>(args_arr));
+		free(args_arr);
+		if (created == NULL) {
+			env->ThrowNew(env->FindClass("java/lang/IllegalArgumentException"), "Cannot allocate an object for provided class(class cannot be abstract or an interface)");
+			return NULL;
+		}
+		if (env->ExceptionCheck() == JNI_TRUE) {
+			return NULL;
+		}
+		return created;
 	*/
 	
 	static {

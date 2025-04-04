@@ -1,11 +1,11 @@
 plugins {
     id "java-library"
-    id "com.badlogicgames.jnigen.jnigen-gradle" version "3.0.0-SNAPSHOT"
+    id "com.badlogicgames.jnigen.jnigen-gradle" version "3.0.0"
     id 'maven-publish'
 }
 
 group = 'dev.progames723.hmmm_natives'
-version = '1.0'
+version = '1.1'
 
 repositories {
     mavenCentral()
@@ -16,7 +16,6 @@ repositories {
 }
 
 dependencies {
-    api "com.badlogicgames.jnigen:jnigen-loader:$jnigen_version"
 }
 
 tasks.named("compileJava") { JavaCompile it ->
