@@ -17,7 +17,7 @@ public class NativeReflectUtils {
 		jsize len = env->GetArrayLength(array);
 		jvalue** arr = reinterpret_cast<jvalue**>(malloc(sizeof(jvalue) * len));
 		for (jsize i = 0; i < len; i++) {
-			jobject o = env->GetObjectArrayElement(arr, i);
+			jobject o = env->GetObjectArrayElement(array, i);
 			jvalue to_add;
 			to_add.l = o;
 			(*arr)[i] = to_add;
@@ -446,7 +446,6 @@ public class NativeReflectUtils {
 	*/
 	
 	public static native Object callStaticObjectMethod(Class<?> cls, String name, String signature, Object[] args);/*
-		jclass cls = env->GetObjectClass(o);
 		jvalue *args_arr = to_jvalue_array(env, args);
 		auto result = env->CallStaticObjectMethodA(cls, env->GetStaticMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
 		free(args_arr);
@@ -567,7 +566,7 @@ public class NativeReflectUtils {
 	
 	public static native void callNonVirtualVoidMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
 		jvalue *args_arr = to_jvalue_array(env, args);
-		auto result = env->CallNonVirtualObjectMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		auto result = env->CallNonvirtualObjectMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
 		free(args_arr);
 		if (env->ExceptionCheck() == JNI_TRUE) {
 			return NULL;
@@ -577,7 +576,7 @@ public class NativeReflectUtils {
 	
 	public static native int callNonVirtualIntMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
 		jvalue *args_arr = to_jvalue_array(env, args);
-		auto result = env->CallNonVirtualIntMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		auto result = env->CallNonvirtualIntMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
 		free(args_arr);
 		if (env->ExceptionCheck() == JNI_TRUE) {
 			return NULL;
@@ -587,7 +586,7 @@ public class NativeReflectUtils {
 	
 	public static native long callNonVirtualLongMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
 		jvalue *args_arr = to_jvalue_array(env, args);
-		auto result = env->CallNonVirtualLongMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		auto result = env->CallNonvirtualLongMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
 		free(args_arr);
 		if (env->ExceptionCheck() == JNI_TRUE) {
 			return NULL;
@@ -597,7 +596,7 @@ public class NativeReflectUtils {
 	
 	public static native float callNonVirtualFloatMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
 		jvalue *args_arr = to_jvalue_array(env, args);
-		auto result = env->CallNonVirtualFloatMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		auto result = env->CallNonvirtualFloatMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
 		free(args_arr);
 		if (env->ExceptionCheck() == JNI_TRUE) {
 			return NULL;
@@ -607,7 +606,7 @@ public class NativeReflectUtils {
 	
 	public static native double callNonVirtualDoubleMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
 		jvalue *args_arr = to_jvalue_array(env, args);
-		auto result = env->CallNonVirtualDoubleMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		auto result = env->CallNonvirtualDoubleMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
 		free(args_arr);
 		if (env->ExceptionCheck() == JNI_TRUE) {
 			return NULL;
@@ -617,7 +616,7 @@ public class NativeReflectUtils {
 	
 	public static native short callNonVirtualShortMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
 		jvalue *args_arr = to_jvalue_array(env, args);
-		auto result = env->CallNonVirtualShortMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		auto result = env->CallNonvirtualShortMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
 		free(args_arr);
 		if (env->ExceptionCheck() == JNI_TRUE) {
 			return NULL;
@@ -627,7 +626,7 @@ public class NativeReflectUtils {
 	
 	public static native char callNonVirtualCharMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
 		jvalue *args_arr = to_jvalue_array(env, args);
-		auto result = env->CallNonVirtualCharMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		auto result = env->CallNonvirtualCharMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
 		free(args_arr);
 		if (env->ExceptionCheck() == JNI_TRUE) {
 			return NULL;
@@ -637,7 +636,7 @@ public class NativeReflectUtils {
 	
 	public static native byte callNonVirtualByteMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
 		jvalue *args_arr = to_jvalue_array(env, args);
-		auto result = env->CallNonVirtualByteMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		auto result = env->CallNonvirtualByteMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
 		free(args_arr);
 		if (env->ExceptionCheck() == JNI_TRUE) {
 			return NULL;
@@ -647,7 +646,7 @@ public class NativeReflectUtils {
 	
 	public static native boolean callNonVirtualBooleanMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
 		jvalue *args_arr = to_jvalue_array(env, args);
-		auto result = env->CallNonVirtualBooleanMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		auto result = env->CallNonvirtualBooleanMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
 		free(args_arr);
 		if (env->ExceptionCheck() == JNI_TRUE) {
 			return NULL;
@@ -657,7 +656,7 @@ public class NativeReflectUtils {
 	
 	public static native Object callNonVirtualObjectMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
 		jvalue *args_arr = to_jvalue_array(env, args);
-		auto result = env->CallNonVirtualObjectMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		auto result = env->CallNonvirtualObjectMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
 		free(args_arr);
 		if (env->ExceptionCheck() == JNI_TRUE) {
 			return NULL;
@@ -676,7 +675,7 @@ public class NativeReflectUtils {
 			return NULL;
 		}
 		if (env->ExceptionCheck() == JNI_TRUE) {
-			return NULL
+			return NULL;
 		}
 		return allocated;
 	*/
