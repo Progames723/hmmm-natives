@@ -13,11 +13,11 @@ public class NativeReflectUtils {
 	
 	#include <cstdlib>
 	
-	jvalue* to_jvalue_array(JNIEnv* env, autoArray array) {
+	jvalue* to_jvalue_array(JNIEnv* env, jobjectArray array) {
 		jsize len = env->GetArrayLength(array);
 		jvalue** arr = reinterpret_cast<jvalue**>(malloc(sizeof(jvalue) * len));
 		for (jsize i = 0; i < len; i++) {
-			auto o = env->GetObjectArrayElement(arr, i);
+			jobject o = env->GetObjectArrayElement(arr, i);
 			jvalue to_add;
 			to_add.l = o;
 			(*arr)[i] = to_add;
@@ -592,7 +592,6 @@ public class NativeReflectUtils {
 		if (env->ExceptionCheck() == JNI_TRUE) {
 			return NULL;
 		}
-		free(args_arr);
 		return result;
 	*/
 	
