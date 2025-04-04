@@ -566,12 +566,11 @@ public class NativeReflectUtils {
 	
 	public static native void callNonVirtualVoidMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
 		jvalue *args_arr = to_jvalue_array(env, args);
-		auto result = env->CallNonvirtualObjectMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
+		env->CallNonvirtualVoidMethodA(o, cls, env->GetMethodID(cls, name, signature), const_cast<const jvalue*>(args_arr));
 		free(args_arr);
 		if (env->ExceptionCheck() == JNI_TRUE) {
-			return NULL;
+			return;
 		}
-		return result;
 	*/
 	
 	public static native int callNonVirtualIntMethod(Class<?> cls, Object o, String name, String signature, Object[] args);/*
