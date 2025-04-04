@@ -1,6 +1,14 @@
 name: Build Workflow
 
-on: [push, pull_request]
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "src/main/java/**"
+  pull_request:
+    types: [ opened, reopened, synchronize, edited, ready_for_review, review_requested ]
+    paths:
+      - "src/main/java/**"
 
 jobs:
   build-linux:
