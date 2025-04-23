@@ -7,6 +7,6 @@ class NativeLibraries {
 	
 	public static void initIfNeeded() {
 		if (!initialized) initialized = true;
-		new SharedLibraryLoader().load("hmmm-natives");
+		new SharedLibraryLoader().load("hmmm_natives");
 	}
 }
